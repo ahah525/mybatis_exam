@@ -1,5 +1,7 @@
 package com.ll.exam.app_2022_09_23.app.interceptor;
 
+import com.ll.exam.app_2022_09_23.app.base.rq.Rq;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -10,10 +12,15 @@ import javax.servlet.http.HttpSession;
 
 @Component
 @Slf4j
+@RequiredArgsConstructor
 public class NeedToLoginInterceptor implements HandlerInterceptor {
+    private final Rq rq;
+
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         log.debug("NeedToLoginInterceptor::preHandle 실행됨");
+        rq.increaseCount();
+        log.debug("rq : " + rq + ", rq.count : " + rq.getCount());
 
         HttpSession session = request.getSession();
 
