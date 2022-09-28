@@ -22,4 +22,9 @@ public class ArticleController {
     public String showDetail(@PathVariable Long id) {
         return "article/detail";
     }
+
+    @GetMapping("/write")
+    public String showWrite() {
+        return "article/write";
+    }
 }
