@@ -29,5 +29,6 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
         ir = registry.addInterceptor(needToLoginInterceptor);
         ir.addPathPatterns("/article/write");
+        ir.addPathPatterns("/member/me");
     }
 }
