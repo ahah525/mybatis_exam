@@ -1,6 +1,7 @@
 package com.ll.exam.app_2022_09_23.app.base.rq;
 
 import com.ll.exam.app_2022_09_23.app.member.dto.Member;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.RequestScope;
@@ -18,6 +19,8 @@ public class Rq {
     private final HttpServletRequest req;
     private final HttpServletResponse resp;
     private final HttpSession session;
+    @Getter
+    private String alertMsg;
 
     public String getCurrentUrl() {
         String url = req.getRequestURL().toString();
@@ -84,5 +87,11 @@ public class Rq {
         session.removeAttribute("loginedMemberUsername");
         session.removeAttribute("loginedMemberName");
         session.removeAttribute("loginedMemberEmail");
+    }
+
+    public String historyBackTemplate(String msg) {
+        this.alertMsg = msg;
+
+        return "common/js";
     }
 }
