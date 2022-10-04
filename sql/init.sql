@@ -65,3 +65,7 @@ ADD COLUMN member_id BIGINT UNSIGNED NOT NULL AFTER modifyDate;
 -- 기존 게시물의 작성자를 모두 user2로 지정
 UPDATE article
 SET member_id = 2;
+
+-- 게시물 작성자 id 컬럼명을 카멜 케이스로 변경
+ALTER TABLE article
+CHANGE member_id memberId BIGINT UNSIGNED NOT NULL;
