@@ -1,9 +1,9 @@
-# DB 생성
+-- DB 생성
 DROP DATABASE IF EXISTS app_2022_09_23;
 CREATE DATABASE app_2022_09_23;
 USE app_2022_09_23;
 
-# 게시물 테이블 생성
+-- 게시물 테이블 생성
 CREATE TABLE article (
                          id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
                          PRIMARY KEY(id),
@@ -13,7 +13,7 @@ CREATE TABLE article (
                          content LONGTEXT NOT NULL
 );
 
-# 게시물 데이터
+-- 게시물 데이터
 INSERT INTO article
 SET createDate = NOW(),
 modifyDate = NOW(),
@@ -26,7 +26,7 @@ modifyDate = NOW(),
 `subject` = '제목2',
 content = '내용2';
 
-# 회원 테이블 생성
+-- 회원 테이블 생성
 CREATE TABLE `member` (
                           id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
                           PRIMARY KEY(id),
@@ -38,7 +38,7 @@ CREATE TABLE `member` (
                           email CHAR(100) NOT NULL
 );
 
-# 회원 데이터
+-- 회원 데이터
 INSERT INTO `member`
 SET createDate = NOW(),
 modifyDate = NOW(),
@@ -57,3 +57,11 @@ email = 'user2@test.com';
 
 SELECT *
 FROM `member`;
+
+-- 게시물에 작성자 정보 추가
+ALTER TABLE article
+ADD COLUMN member_id BIGINT UNSIGNED NOT NULL AFTER modifyDate;
+
+-- 기존 게시물의 작성자를 모두 user2로 지정
+UPDATE article
+SET member_id = 2;
