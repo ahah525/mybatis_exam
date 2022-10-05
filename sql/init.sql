@@ -69,3 +69,21 @@ SET member_id = 2;
 -- 게시물 작성자 id 컬럼명을 카멜 케이스로 변경
 ALTER TABLE article
 CHANGE member_id memberId BIGINT UNSIGNED NOT NULL;
+
+-- 회원에 권한 정보 추가
+ALTER TABLE `member`
+    ADD COLUMN `roles` CHAR(50) NOT NULL AFTER modifyDate;
+
+-- 기존 회원을 일반 회원으로
+UPDATE `member`
+SET roles = 'MEMBER';
+
+-- admin 회원 추가
+INSERT INTO `member`
+SET createDate = NOW(),
+modifyDate = NOW(),
+roles = 'ADMIN,MEMBER',
+username = 'admin',
+`password` = '{noop}1234',
+`name` = '관리자',
+email = 'admin@test.com';
